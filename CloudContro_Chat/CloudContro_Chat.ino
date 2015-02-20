@@ -30,6 +30,16 @@ int incomingByte = 0; //for incoming serial data
 int count = 0;
 String mystring;
 char mychar;
+int set1 = 13;
+int set2 = 12;
+int set3 = 11;
+int set4 = 10;
+int set5 = 9;
+int set6 = 8;
+int control1=30;
+int thunderdelay;
+int cycle;
+int interval;
 
 void setup()
 {  
@@ -38,21 +48,26 @@ void setup()
   //ble_set_pins(3, 2);
   
   // Set your BLE Shield name here, max. length 10
-  //ble_set_name("My Name");
+  ble_set_name("The Cloud");
   
   // Init. and start BLE library.
   ble_begin();
   
   // Enable serial debug
+  
   Serial.begin(57600);
+   pinMode(set1, OUTPUT); 
+  pinMode(set2, OUTPUT);
+  pinMode(set3, OUTPUT); 
+ pinMode(set4, OUTPUT); 
+pinMode(set5, OUTPUT); 
+pinMode(set6, OUTPUT); 
   
 }
 
-unsigned char buf[16] = {0};
-
 unsigned char len = 0;
 
-unsigned char str[50];
+unsigned char str[50]={0};
 
 void loop()
 {
@@ -62,52 +77,173 @@ void loop()
   { 
     
     
-    Serial.println("Start Command");
+    mystring="";
     
     while ( ble_available() ){
-     count= count + 1;
-     
-      //Serial.print("Count =");
-      //Serial.println(count);
-      reed=char(ble_read());
-      Serial.print("Reed is equal to:");
-      Serial.println(reed);
-      str[count-1]=reed;
-      //Serial.write(ble_read());
-      //inputString = Serial.read();
-      
-       // This will Print the Message Array once it's stored
+     str[count]=ble_read();
+      count= count + 1;
     }
      int i;
-      for (i = 0; i < 16; i = i + 1) {
+      for (i = 0; i < count; i = i + 1) {
         if ( str[i] != 0){
-          mychar = buf[i];
+          mychar = str[i];
          mystring += mychar;
-        Serial.print(mychar);
-        Serial.print(",");
+  
         
         }
-        
-        
+     }
   
-      
-     
-     
-  
-  }
-  
-      Serial.print("My String is says");
-      
-      Serial.println(mystring);
-  
-  Serial.println("Command Finished");
-  char buf[16] = {0};
+  char str[50] = {0};
   count=0;
+  
+ 
   }
  
+ if(mystring == "12"){
+  
+   thunderdelay=random(1500,2500);
+cycle=random(1,5);
+interval= random(10,100);
+Serial.println(cycle);
+  if (cycle == 1){
+    
+  digitalWrite(set3, HIGH);
+  delay(150);
+  digitalWrite(set3, LOW);
+  delay(interval);
+  
+  digitalWrite(set3,HIGH);
   
   
+    digitalWrite(set6, HIGH);
+  delay(100);
+  digitalWrite(set6, LOW);
+  digitalWrite(set3,LOW);
   
+  
+    digitalWrite(set5, HIGH);
+  delay(50);
+  digitalWrite(set5, LOW);  
+  
+  digitalWrite(set4, HIGH);
+  delay(interval);
+  digitalWrite(set4, LOW);
+  
+    digitalWrite(set5, HIGH);
+  delay(50);
+  digitalWrite(set5, LOW);
+  
+    digitalWrite(set6, HIGH);
+  delay(70);
+  digitalWrite(set6, LOW);
+  
+    digitalWrite(set1, HIGH);
+  delay(500);
+  digitalWrite(set1, LOW);    // end of first burst
+  
+  delay(thunderdelay); 
+  }
+  
+  if( cycle == 2){
+    digitalWrite(set1, HIGH);   //begining of short bursts
+  delay(40);
+  digitalWrite(set1, LOW);
+  delay(250);
+    digitalWrite(set1, HIGH);
+  delay(40);
+  digitalWrite(set1, LOW);
+  delay(50);
+  
+      digitalWrite(set1, HIGH);   //begining of short bursts
+  delay(40);
+  digitalWrite(set1, LOW);
+  delay(250);
+    digitalWrite(set2, HIGH);
+       digitalWrite(set1, HIGH);
+  delay(40);
+  digitalWrite(set2, LOW);
+  delay(50);
+      digitalWrite(set3, HIGH);   //begining of short bursts
+  delay(40);
+  digitalWrite(set1, LOW);
+  delay(250);
+    digitalWrite(set1, HIGH);
+  delay(40);
+  digitalWrite(set1, LOW);
+     digitalWrite(set3, LOW);
+  delay(50);
+  
+   delay(thunderdelay); 
+  }
+  
+  if(cycle == 3){
+     digitalWrite(set1, LOW);
+  delay(250);
+    digitalWrite(set1, HIGH);
+  delay(interval);
+  digitalWrite(set1, LOW);
+     digitalWrite(set3, LOW);
+     digitalWrite(set5,HIGH);
+     digitalWrite(set6,HIGH);
+     delay(100);
+     digitalWrite(set5, LOW);
+     delay(50);
+     digitalWrite(set5,HIGH);
+     delay(250);
+     digitalWrite(set6,LOW);
+     delay(120);
+     digitalWrite(set5, LOW);
+     
+          digitalWrite(set1, LOW);
+  delay(250);
+    digitalWrite(set3, HIGH);
+  delay(interval);
+  digitalWrite(set1, LOW);
+     digitalWrite(set3, LOW);
+     digitalWrite(set5,HIGH);
+     digitalWrite(set6,HIGH);
+     delay(100);
+     digitalWrite(set5, LOW);
+     delay(50);
+     digitalWrite(set5,HIGH);
+     delay(70);
+     digitalWrite(set6,LOW);
+     delay(20);
+     digitalWrite(set5, LOW);
+     delay(thunderdelay); 
+    
+  }
+  
+  if (cycle == 4){
+     digitalWrite(set6,HIGH);
+     delay(20);
+     digitalWrite(set5, HIGH); 
+     delay(interval);
+     digitalWrite(set5,LOW);
+     digitalWrite(set4,HIGH);
+     delay(100);
+     digitalWrite(set4,LOW);
+     digitalWrite(set6, LOW);
+         digitalWrite(set5,HIGH);
+     delay(20);
+     digitalWrite(set6, HIGH);
+     digitalWrite(set3, HIGH); 
+     delay(interval);
+     digitalWrite(set3,LOW);
+     digitalWrite(set4,HIGH);
+     delay(100);
+     digitalWrite(set4,LOW);
+    delay(thunderdelay); 
+  }
+  
+  if(cycle == 5){
+    
+  }
+  
+}
+  
+ 
+ 
   //This Section sends data to the App
   if ( Serial.available() )
   {
