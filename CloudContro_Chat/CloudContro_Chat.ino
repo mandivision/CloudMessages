@@ -56,9 +56,9 @@ void setup()
   // Enable serial debug
   
   Serial.begin(57600);
-   pinMode(set1, OUTPUT); 
-  pinMode(set2, OUTPUT);
-  pinMode(set3, OUTPUT); 
+ pinMode(set1, OUTPUT); 
+ pinMode(set2, OUTPUT);
+ pinMode(set3, OUTPUT); 
  pinMode(set4, OUTPUT); 
 pinMode(set5, OUTPUT); 
 pinMode(set6, OUTPUT); 
@@ -76,10 +76,11 @@ void loop()
   if ( ble_available() )
   { 
     
+    mystring=""; 
     
-    mystring="";
     
     while ( ble_available() ){
+     mystring=""; 
      str[count]=ble_read();
       count= count + 1;
     }
@@ -93,13 +94,39 @@ void loop()
         }
      }
   
+  while (mystring == "12"){
+    thunder();
+  }
   char str[50] = {0};
   count=0;
+   
   
  
   }
  
- if(mystring == "12"){
+ 
+  
+ 
+ 
+  //This Section sends data to the App
+  if ( Serial.available() )
+  {
+    delay(5);
+    
+    while ( Serial.available() )
+       
+        ble_write( Serial.read() );
+        
+  }
+  
+  ble_do_events();
+  
+
+}
+
+
+void thunder() {
+
   
    thunderdelay=random(1500,2500);
 cycle=random(1,5);
@@ -240,23 +267,5 @@ Serial.println(cycle);
     
   }
   
-}
-  
- 
- 
-  //This Section sends data to the App
-  if ( Serial.available() )
-  {
-    delay(5);
-    
-    while ( Serial.available() )
-       
-        ble_write( Serial.read() );
-        
-  }
-  
-  ble_do_events();
-  
 
 }
-
