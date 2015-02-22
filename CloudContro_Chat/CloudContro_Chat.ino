@@ -75,6 +75,8 @@ void loop()
   
   if ( ble_available() )
   { 
+    
+    
     mystring="";
     
     while ( ble_available() ){
@@ -96,48 +98,12 @@ void loop()
   
  
   }
-  
-  if(mystring == "all");{
-    digitalWrite(set1,HIGH);
-    digitalWrite(set2,HIGH);
-    digitalWrite(set3,HIGH);
-    digitalWrite(set4,HIGH);
-    digitalWrite(set5,HIGH);
-    digitalWrite(set6,HIGH);
-  }
-  
-    if{
-    digitalWrite(set1,LOW);
-    digitalWrite(set2,LOW);
-    digitalWrite(set3,LOW);
-    digitalWrite(set4,LOW);
-    digitalWrite(set5,LOW);
-    digitalWrite(set6,LOW);
-  }while(mystring == "no");
-    
-
  
- while(mystring == "1"){
-   cycle=1;
- }
-  while(mystring == "2"){
-   cycle=2;
- }
+ if(mystring == "12"){
   
-   while(mystring == "3"){
-   cycle=3;
- }
- 
-  while(mystring == "4"){
-   cycle=4;
- }
-   while(mystring == "5"){
-   cycle=5;
- }
-thunderdelay=random(1500,3500);
-//cycle=random(1,5);
-
-interval= random(10,200);
+   thunderdelay=random(1500,2500);
+cycle=random(1,5);
+interval= random(10,100);
 Serial.println(cycle);
   if (cycle == 1){
     
@@ -274,7 +240,7 @@ Serial.println(cycle);
     
   }
   
-
+}
   
  
  
