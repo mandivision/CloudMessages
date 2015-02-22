@@ -76,7 +76,7 @@ void loop()
   if ( ble_available() )
   { 
     
-    mystring=""; 
+    mystring="no"; 
     
     
     while ( ble_available() ){
@@ -96,6 +96,7 @@ void loop()
   
   while (mystring == "12"){
     thunder();
+    Serial.print("thunder is done");
   }
   char str[50] = {0};
   count=0;
@@ -128,7 +129,7 @@ void loop()
 void thunder() {
 
   
-   thunderdelay=random(1500,2500);
+thunderdelay=random(1500,2500);
 cycle=random(1,5);
 interval= random(10,100);
 Serial.println(cycle);
