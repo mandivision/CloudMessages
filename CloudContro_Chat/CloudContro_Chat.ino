@@ -98,7 +98,25 @@ void loop()
   
  
   }
- 
+  
+  if(mystring == "all"){
+    digitalWrite(set1, HIGH); 
+    digitalWrite(set2, HIGH); 
+    digitalWrite(set3, HIGH); 
+    digitalWrite(set4, HIGH); 
+    digitalWrite(set5, HIGH); 
+    digitalWrite(set6, HIGH); 
+  }
+  
+   if(mystring == "no"){
+    digitalWrite(set1, LOW);
+    digitalWrite(set2, LOW); 
+    digitalWrite(set3, LOW); 
+    digitalWrite(set4, LOW); 
+    digitalWrite(set5, LOW); 
+    digitalWrite(set6, LOW); 
+  }
+  
  if(mystring == "12"){
   
    thunderdelay=random(1500,2500);
