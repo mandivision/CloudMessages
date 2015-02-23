@@ -24,8 +24,6 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 #include <boards.h>
 #include <RBL_nRF8001.h>
 
-char reed;         // a string to hold incoming data
-boolean stringComplete = false;  // whether the string is complete
 int incomingByte = 0; //for incoming serial data
 int count = 0;
 String mystring;
@@ -108,7 +106,7 @@ void loop()
     digitalWrite(set6, HIGH); 
   }
   
-   if(mystring == "no"){
+   else if(mystring == "no"){
     digitalWrite(set1, LOW);
     digitalWrite(set2, LOW); 
     digitalWrite(set3, LOW); 
@@ -117,14 +115,19 @@ void loop()
     digitalWrite(set6, LOW); 
   }
   
- if(mystring == "12"){
+ else{
+  if(mystring=="1") { cycle=1;}
+  if(mystring=="2") { cycle=2;}
+  if(mystring=="3") { cycle=3;}
+  if(mystring=="4") { cycle=4;}
+  if(mystring=="5") { cycle=5;}
+  if(mystring=="6") { cycle=random(1,5);}
   
-   thunderdelay=random(1500,2500);
-cycle=random(1,5);
-interval= random(10,100);
+   thunderdelay=random(1500,3500);
+interval= random(10,150);
 Serial.println(cycle);
   if (cycle == 1){
-    
+                                                      //CYCLE ONE
   digitalWrite(set3, HIGH);
   delay(150);
   digitalWrite(set3, LOW);
@@ -137,6 +140,7 @@ Serial.println(cycle);
   delay(100);
   digitalWrite(set6, LOW);
   digitalWrite(set3,LOW);
+  delay(thunderdelay);
   
   
     digitalWrite(set5, HIGH);
@@ -162,7 +166,8 @@ Serial.println(cycle);
   delay(thunderdelay); 
   }
   
-  if( cycle == 2){
+  if(cycle == 2){
+                                                                      //CYCLE TWO
     digitalWrite(set1, HIGH);   //begining of short bursts
   delay(40);
   digitalWrite(set1, LOW);
@@ -189,6 +194,17 @@ Serial.println(cycle);
   delay(40);
   digitalWrite(set1, LOW);
      digitalWrite(set3, LOW);
+  delay(50);
+  digitalWrite(set3, HIGH);   //begining of short bursts
+  delay(40);
+  digitalWrite(set1, LOW);
+  delay(250);
+    digitalWrite(set1, HIGH);
+    digitalWrite(set4,HIGH);
+  delay(40);
+  digitalWrite(set1, LOW);
+     digitalWrite(set3, LOW);
+     digitalWrite(set4, LOW);
   delay(50);
   
    delay(thunderdelay); 
@@ -248,6 +264,7 @@ Serial.println(cycle);
      digitalWrite(set3, HIGH); 
      delay(interval);
      digitalWrite(set3,LOW);
+     digitalWrite(set6, LOW);
      digitalWrite(set4,HIGH);
      delay(100);
      digitalWrite(set4,LOW);
