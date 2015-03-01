@@ -28,12 +28,12 @@ int incomingByte = 0; //for incoming serial data
 int count = 0;
 String mystring;
 char mychar;
-int set1 = 13;
+int set1 = 9;
 int set2 = 12;
-int set3 = 11;
-int set4 = 10;
-int set5 = 9;
-int set6 = 8;
+int set3 = 8;
+int set4 = 11;
+int set5 = 13;
+int set6 = 10;
 int control1=30;
 int thunderdelay;
 int cycle;
@@ -121,10 +121,13 @@ void loop()
   if(mystring=="3") { cycle=3;}
   if(mystring=="4") { cycle=4;}
   if(mystring=="5") { cycle=5;}
-  if(mystring=="6") { cycle=random(1,5);}
+  if(mystring=="6") { cycle = 6;}
+  if(mystring=="6") { cycle=random(1,6);}
   
    thunderdelay=random(1500,3500);
 interval= random(10,150);
+int med= random(150,300);
+int lon= random(300,800);
 Serial.println(cycle);
   if (cycle == 1){
                                                       //CYCLE ONE
@@ -158,6 +161,18 @@ Serial.println(cycle);
     digitalWrite(set6, HIGH);
   delay(70);
   digitalWrite(set6, LOW);
+  
+  digitalWrite(set5, HIGH);
+  delay(50);
+  digitalWrite(set5, LOW);  
+  
+  digitalWrite(set4, HIGH);
+  delay(interval);
+  digitalWrite(set4, LOW);
+  
+    digitalWrite(set5, HIGH);
+  delay(50);
+  digitalWrite(set5, LOW);
   
     digitalWrite(set1, HIGH);
   delay(500);
@@ -194,8 +209,8 @@ Serial.println(cycle);
   delay(40);
   digitalWrite(set1, LOW);
      digitalWrite(set3, LOW);
-  delay(50);
-  digitalWrite(set3, HIGH);   //begining of short bursts
+  delay(interval);
+  digitalWrite(set2, HIGH);   //begining of short bursts
   delay(40);
   digitalWrite(set1, LOW);
   delay(250);
@@ -203,7 +218,7 @@ Serial.println(cycle);
     digitalWrite(set4,HIGH);
   delay(40);
   digitalWrite(set1, LOW);
-     digitalWrite(set3, LOW);
+     digitalWrite(set2, LOW);
      digitalWrite(set4, LOW);
   delay(50);
   
@@ -255,24 +270,128 @@ Serial.println(cycle);
      delay(interval);
      digitalWrite(set5,LOW);
      digitalWrite(set4,HIGH);
+     digitalWrite(set6,LOW);
      delay(100);
      digitalWrite(set4,LOW);
-     digitalWrite(set6, LOW);
+     digitalWrite(set6, HIGH);
          digitalWrite(set5,HIGH);
      delay(20);
-     digitalWrite(set6, HIGH);
+     digitalWrite(set6, LOW);
      digitalWrite(set3, HIGH); 
      delay(interval);
      digitalWrite(set3,LOW);
+     digitalWrite(set5,LOW);
+     digitalWrite(set6,HIGH);
+     delay(interval);
      digitalWrite(set6, LOW);
      digitalWrite(set4,HIGH);
+     digitalWrite(set5,HIGH);
      delay(100);
+     digitalWrite(set5,LOW);
+     delay(30);
      digitalWrite(set4,LOW);
     delay(thunderdelay); 
+     digitalWrite(set1, HIGH);
+  delay(70);
+  digitalWrite(set1, LOW);
+  
+  digitalWrite(set2, HIGH);
+  delay(50);
+  digitalWrite(set2, LOW);  
+  delay(10);
+  digitalWrite(set4,HIGH);
+  delay(40);
+  digitalWrite(set3, HIGH);
+  digitalWrite(set4,LOW);
+  
+  delay(interval);
+  digitalWrite(set3, LOW);
+  
+  digitalWrite(set5, HIGH);
+  delay(interval);
+  digitalWrite(set5, LOW);
+  delay(70);
+   digitalWrite(set5, HIGH);
+  delay(interval);
+  digitalWrite(set5, LOW);
+  delay(20);
+   digitalWrite(set5, HIGH);
+  delay(interval);
+  digitalWrite(set5, LOW);
+   delay(20);
+   digitalWrite(set5, HIGH);
+  delay((interval*2));
+  digitalWrite(set5, LOW);
+  
+ 
+  
+   delay(thunderdelay);
+  
+    
   }
   
   if(cycle == 5){
+    digitalWrite(set6,HIGH);
+    delay(40);
+    digitalWrite(set5,HIGH);
+    digitalWrite(set6,LOW);
+    delay(interval);
+    digitalWrite(set4, HIGH);
+    digitalWrite(set3,HIGH);
+    digitalWrite(set5, LOW);
+    delay(interval);    
+    digitalWrite(set4,LOW);
+    delay(30);
+    digitalWrite(set3,LOW);
+    digitalWrite(set4,HIGH);
+    delay(20);
+    digitalWrite(set4,LOW);
     
+     digitalWrite(set6, HIGH);
+  delay(70);
+  digitalWrite(set6, LOW);
+  
+  digitalWrite(set5, HIGH);
+  delay(50);
+  digitalWrite(set5, LOW);  
+  
+  digitalWrite(set4, HIGH);
+  delay(interval);
+  digitalWrite(set4, LOW);
+  
+  delay(thunderdelay);
+  }
+  
+    if(cycle == 6){
+ digitalWrite(set4, HIGH);
+  delay(interval);
+  digitalWrite(set4, LOW);
+  delay(10);
+  
+ 
+  
+   digitalWrite(set4, HIGH);
+  delay(interval);
+  digitalWrite(set4, LOW);
+  delay(10);
+  
+   digitalWrite(set5, HIGH);
+  delay(interval);
+  digitalWrite(set5, LOW);
+  delay(10);
+  
+   digitalWrite(set4, HIGH);
+  delay(interval);
+  digitalWrite(set4, LOW);
+  delay(10);
+  
+   digitalWrite(set3, HIGH);
+  delay(interval);
+  digitalWrite(set3, LOW);
+  delay(10);
+  
+  
+  delay(thunderdelay);
   }
   
 }
